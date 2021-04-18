@@ -1,0 +1,10 @@
+{% extends "layout/layout_404.html" %}
+
+{% block content %}
+    <h1>UGYLDIG AUTORISASJON: [ ref:{{error}} ]</h1>
+    <p>Du har utført en forespørsel til serveren som du ikke er autorisert til.</p>
+    <p>Du har enten ikke logget deg inn og forsøkt en bruker funksjon,</p>
+    <p>eller funksjonen krever et høyere nivå av autoriseringen enn du har.</p>
+    <p>I tilfelle dette er en feil fra serverens side,</p>
+    <p>loggfører vi hendelsen for fremtidig utbedring.</p>
+{% endblock content %}

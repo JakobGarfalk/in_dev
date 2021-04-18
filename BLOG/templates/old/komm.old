@@ -1,0 +1,67 @@
+{% extends "layout/layout1w3.html" %}
+
+{% block content %}
+    <h1>Quasi-Arkivarium</h1>
+    <p>Velkommen,</p>
+    <p>ønsker du å legge igjen en kommentar så føl deg fri til det.</p>
+    <p>Kommentarer kan postes anonymt, og knyttes ikke opp mot noen bruker-profil.</p>
+    
+{% endblock %}
+
+{% block extra %}
+    <div class="historier">
+        <h3>Kommentarer</h3>
+        {% if poster %}
+        {% for comment in poster %}
+            <small>
+                
+            {% if comment.forfatter %}
+                {{ comment.forfatter}} skrev:
+            {% else %}
+                <p>anonym skrev:</p>
+            {% endif %}
+            </small>
+            
+                {{ comment.innhold | replace("\n", "<br>") | safe }}
+             
+            
+            <small>
+                
+            {% if comment.dato %}
+                <p>  postet: {{ comment.dato.strftime("kl.%H:%M:%S den %e.%b.%y ") }}  </p>
+            {% else %}
+                <p> ( postet: i ukjente tider )
+            {% endif %}
+                    
+        </small>
+        {% endfor %}
+        {% else %}
+            <p>Ingen kommentarer i databasen.</p>
+        {% endif %}
+    </div>
+    <table>
+    <form action="" method="post" class="form" role="form">
+        {{ form.csrf_token() }}
+        {{ form.message }}
+        {{ form.contents.label }}
+        {{ form.contents }}
+        <br>
+        {{ form.forfatter.label }}
+        {{ form.forfatter }}
+        {{ form.send_knapp }}
+        
+    </form>
+
+    </table>
+
+    <p> -- </p>
+            <table>
+            <form action="" method="POST">
+                <textarea name="contents" placeholder="Enter a comment" class="form-control" required></textarea>
+                
+                <input type="text" id="forfatter" name="forfatter" placeholder="kall meg:">
+                <input type="submit" class="btn btn-success" value="Post comment">
+            </form>
+            </table>
+
+{% endblock %}

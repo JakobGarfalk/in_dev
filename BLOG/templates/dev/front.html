@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+  {% if title %}
+  <title>{{ title }}</title>
+  {% else %}
+  <title>Deus Ex Machina</title>
+  {% endif %}
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/w3.css')}}" />
+</head>
+
+<body>
+  {% block content %}
+  <h1>Did you come here by accident?</h1>
+  <p>We are sorry, but to see you is not to know you,</p>
+  <p>reveal yourself to us?</p>
+  <img src="{{url_for('static', filename='/images/jolly_roger.jpg') }}" alt="StrangerDanger">
+  <form action="." method="POST">          
+    <textarea name="revelation" placeholder="tell me what i need to know..." class="text-form" cols="50" rows="6" required></textarea><br>
+    <input type="submit" name="submit1" class="btn btn-success" value="SEND">
+</form>
+  <audio controls autoplay hidden>
+    <source src="{{ url_for('static', filename='/lyd/voice_proveyourself.mp3') }}">
+  </audio>
+  {% endblock %} 
+  
+  {% with messages = get_flashed_messages()%} 
+    {% if messages %}
+      <div class="w3-container w3-red">{{ messages }}</div>
+    {% endif %} 
+  {% endwith %}
+  
+  {% if msg %}
+      <div class="w3-container w3-red">{{ msg }}</div>
+  {% endif %} 
+  
+  
+  {% block extra %} 
+  {% endblock extra %}
+
+  <hr />
+
+  <footer>
+
+    <p>© 2021</p>
+  </footer>
+</body>
+
+</html>

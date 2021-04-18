@@ -1,0 +1,20 @@
+{% macro PostForm1() %}
+
+
+
+
+ex:
+{% from "macros.html" import nav_link with context %}
+
+{{ nav_link('home', 'Home') }}
+{{ nav_link('about', 'About') }}
+
+
+
+{% macro nav_link(endpoint, text) %}
+{% if request.endpoint.endswith(endpoint) %}
+    <li class="active"><a href="{{ url_for(endpoint) }}">{{text}}</a></li>
+{% else %}
+    <li><a href="{{ url_for(endpoint) }}">{{text}}</a></li>
+{% endif %}
+{% endmacro %}

@@ -1,0 +1,9 @@
+{% extends "layout/layout1w3.html" %}
+{% from "macro/form.html" import generell_form %}
+
+{% block content %}
+    {% if form %}
+        {{generell_form(form)}}
+    {% endif %}
+
+{% endblock content %}

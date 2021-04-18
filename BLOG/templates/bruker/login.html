@@ -1,0 +1,42 @@
+{% extends "layout/layout1w3.html" %}
+{% from "macro/form.html" import login_form1 %}
+{% block content %}
+
+  <table border=1>
+ 
+  {% if bruker %}
+    <tr> 
+      <th> Bruker: </th>
+      <td> {{ bruker.brukernavn }} </td>
+    </tr>
+    <tr>
+      <th> Fornavn: </th>
+      <td> {{ bruker.fornavn }} </td>
+    </tr>
+    <tr>
+      <th> Profilside:</th>
+      <td> <a href="/bruker/{{bruker.brukernavn}}" class="w3-bar-item w3-button">{{bruker.brukernavn}}</a> </td>
+    </tr>
+  {% else %}
+   <tr> 
+    <th> Bruker: </th>
+    <td> ikke logget inn</td> </tr> <tr>
+    <th> Opprett ny profil her: </th>
+    <td> <a href="{{ url_for('users.nybruker_view') }}" class="w3-bar-item w3-button">Registrer deg</a> </td>
+   </tr> 
+  {% endif %}      
+  </table>
+</div>  
+
+  {{ login_form1(form) }}
+
+
+{% endblock %}
+
+{% block extra %}
+  {% if lyd1 %}
+    <audio controls autoplay hidden>
+    <source src="{{ url_for('static', filename='/lyd/voice_proveyourself.mp3') }}">
+    </audio>
+  {% endif %}
+{% endblock %}

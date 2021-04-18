@@ -1,0 +1,88 @@
+{% macro bruker_infotable(bruker) %}
+
+<table border=1>
+
+    {% if bruker %}
+      <tr> 
+        <th> Bruker: </th>
+        <td> {{ bruker.brukernavn }} </td>
+      </tr>
+      <tr>
+        <th> Fornavn: </th>
+        <td> {{ bruker.fornavn }} </td>
+      </tr>
+      <tr>
+        <th> Profilside:</th>
+        <td> <a href="/bruker/{{bruker.brukernavn}}" class="w3-bar-item w3-button">{{bruker.brukernavn}}</a> </td>
+      </tr>
+    {% else %}
+     <tr> 
+      <th> Bruker: </th>
+      <td> ikke logget inn</td> </tr> <tr>
+      <th> Opprett ny profil her: </th>
+      <td> <a href="{{ url_for('main.nybruker') }}" class="w3-bar-item w3-button">Registrer deg</a> </td>
+     </tr> 
+    {% endif %}      
+</table>
+{% endmacro %}
+
+{% macro bruker_side(bruker, current_user, follow_me, follow_by) %}
+    <h1>Profil: {{ bruker.brukernavn }} </h1>
+    
+    <p><small>(ID:{{bruker.id}}, Opprettet : {{bruker.dato.strftime("%H:%M:%S %e.%b.%y")}})</small></p>
+    <p>{{bruker.fornavn}} {{bruker.etternavn}}</p>
+    <p>Om meg:  </p>
+    <p>Followers: {{ bruker.followers.count() }},</p>
+    <p>Follows  : {{ bruker.followed.count() }}.</p>
+    {% if follow_me %}
+      <p>Følges av:</p>
+      {% for fm_users in follow_me %}
+        
+        <a href="/bruker/{{fm_users.brukernavn}}" class="w3-item w3-button"> {{fm_users.brukernavn}}</a>
+      {% endfor %}
+    {% endif %}
+    {% if follow_by %}
+      <p>Følger med på:</p>
+      {% for fb_users in follow_by %}
+        
+        <a href="/bruker/{{fb_users.brukernavn}}" class="w3-item w3-button">{{fb_users.fornavn}}; {{fb_users.brukernavn}}</a>
+        </p>
+      {% endfor %}
+    {% endif %}
+    
+    <p>Sist Aktiv: {{bruker.logindato.strftime("%e.%b.%y - %H:%M:%S")}}</p>
+    <p>VALG:  </p>
+    {% if bruker.brukernavn != current_user.brukernavn %}
+      <a href="{{url_for('main.followbruker',get_brukernavn=bruker.brukernavn)}}" class="w3-item w3-button"><bold>FOLLOW</bold></a>
+    {% endif %}
+    {% if bruker.brukernavn==current_user.brukernavn %}
+      <a href="{{url_for('main.bruker_meldinger_view',get_brukernavn=bruker.brukernavn)}}" class="w3-item w3-button"><bold>POSTKASSE</bold></a>
+    {% endif %}
+    <a href="{{url_for('main.bruker_post',get_brukernavn=bruker.brukernavn)}}" class="w3-item w3-button"><bold>Les/rediger siste post</bold></a>
+    
+{% endmacro %}
+
+
+
+
+
+{% macro vis_poster(poster) %}
+
+  <h1 style="font-family: fantasy;">POSTER</h1>
+  {% if poster %}
+  {% for post in poster %}
+    
+    <h2>{{ post.tittel }}</h2>
+    <p>Postet: {{ post.dato.strftime("kl.%H:%M:%S den %e.%b.%y ") }}</p>
+    <strong>{{ post.slug | replace("\n", "<br>") | safe }}</strong>
+    <p>{{ post.innhold  | replace("\n", "<br>") | safe }}</p>
+    
+    <small>{{ post.id }} <br> forfatter: </small>
+    <a href="{{url_for('main.brukerside',get_brukernavn=post.poster_fra.brukernavn)}}" class="w3-item w3-button"><small> {{post.poster_fra.fornavn}} {{ post.poster_fra.etternavn }} </small></a>
+    
+  {% endfor %}
+{% else %}
+  <p>Det er ingen innlegg i databasen.</p>
+{% endif %}
+
+{% endmacro %}

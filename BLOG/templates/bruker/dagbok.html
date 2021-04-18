@@ -1,0 +1,23 @@
+{% extends "layout/layout1w3.html" %}
+
+{% block content %}
+  <h1> Dagbok Funksjon</h1>
+  {% if bruker %}
+    <p> Velkommen {{ bruker.brukernavn }},</p>
+    <p> Din personlige notatblokk:</p>
+  {% else %}
+    <p> Du må være logget inn for å benytte denne funksjonen!</p>
+  {% endif %}
+  <p></p> <hr/>
+  {% if en_dagbok %}
+    <p>ID: {{en_dagbok.id}}</p>
+    <p>ID: {{en_dagbok.forfatter_id}}</p>
+  {% endif %}
+  
+   
+{% endblock %}
+
+<hr/>
+
+{% block extra %}
+{% endblock %}

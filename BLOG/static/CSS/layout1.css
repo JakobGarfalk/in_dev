@@ -1,0 +1,64 @@
+.navbar {
+      background-color: lightslategray;
+      font-size: 1em;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      color: white;
+      display: inline;
+      
+    }
+.navbar-datter a {
+  padding: 8px 5px 8px 5px;
+  text-decoration: none;
+  color: white;
+  font-variant: small-caps;
+  float: left;
+      
+    }
+    /* unvisited link */
+.navbar-datter a:link {
+  color: white;
+}
+
+/* visited link */
+.navbar-datter a:visited {
+  color: white;
+}
+.navbar-datter a:hover {
+      background-color: #555;
+      color: black;    
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      width: 200px;
+      background-color: #f1f1f1;
+    }
+    
+    li a {
+      display: block;
+      color: #000;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+    
+    li a:hover {
+      background-color: #555;
+      color: white;
+    }
+    
+.body-content {
+      padding: 5px;
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+.message {
+        font-weight: 600;
+        color: blue;
+    }
+    
+    
+.navbar-footer {
+      font-variant: small-caps;
+
+    }

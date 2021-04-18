@@ -1,0 +1,33 @@
+{% extends "layout/layout1w3.html" %}
+{% from "macro/view_post.html" import les_poster %}
+{% from "macro/form.html" import generell_form %}
+
+{% block content %}
+  <h1 style="font-family: fantasy;">POSTER</h1>
+  <div class="w3-container w3-margin-left">
+    {% if poster %}
+      {% for post in poster %}
+        
+        <h2>{{ post.tittel }}</h2>
+        <p>Postet: {{ post.dato.strftime("kl.%H:%M:%S den %e.%b.%y ") }}</p>
+        <small> av {{ post.poster_fra.fornavn }} {{ post.poster_fra.etternavn }}  <br></small>
+        <strong>{{ post.slug | replace("\n", "<br>") | safe }}</strong>
+        <p>{{ post.innhold  | replace("\n", "<br>") | safe }}</p>
+        
+        <small>rf:{{ post.id }} <br> profil,</small>
+        <a href="{{url_for('brukerside',get_brukernavn=post.poster_fra.brukernavn)}}" class="w3-item w3-button"><small> {{post.poster_fra.fornavn}} {{ post.poster_fra.etternavn }} </small></a>
+        
+      {% endfor %}
+    {% else %}
+      <p>Det er ingen innlegg i databasen.</p>
+    {% endif %}
+    </div>
+  {{ les_poster(poster) }}
+
+  {{ generell_form(form) }}
+
+{% endblock %}
+
+{% block extra %}
+  {% include "forms/test.html" %}
+{% endblock %}

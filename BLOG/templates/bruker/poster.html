@@ -1,0 +1,20 @@
+{% extends "layout/layout1w3.html" %}
+{% from "macro/view_post.html" import vis_poster %}
+{% from "macro/form.html" import generell_form %}
+
+{% block content %}
+  <h1 style="font-family: fantasy;">POSTER</h1>
+  {{ vis_poster(poster) }}
+  <br>
+  {% if prev_url %}
+    <a href="{{ prev_url }}">Les nyere</a>
+  {% endif %}
+  {% if next_url %}
+    <a href="{{ next_url }}">Les eldre</a>
+  {% endif %}
+  
+{% endblock %}
+
+{% block extra %}
+  {{ generell_form(form) }}
+{% endblock %}

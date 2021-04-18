@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+  {% if title %}
+  <title>{{ title }}</title>
+  {% else %}
+  <title>Deus Ex Machina</title>
+  {% endif %}
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/w3.css')}}" />
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+  <div class="DO_notmess_withlayout_COPY_and_THEN_you_EDIT"></div>
+
+  <div class="w3-bar w3-black">
+    <a href="{{ url_for('main.index') }}" class="w3-bar-item w3-button">Index</a>
+    <a href="{{ url_for('main.kommenter') }}" class="w3-bar-item w3-button">Fri Sone</a>
+    {% if current_user.brukernavn %}
+        <a href="/bruker/{{current_user.brukernavn}}" class="w3-bar-item w3-button">Din Profil</a>
+    {% else %}
+        <a href="{{ url_for('users.login_view') }}" class="w3-bar-item w3-button">Login</a>
+    {% endif %}
+    <a href="{{ url_for('main.innlegg') }}" class="w3-bar-item w3-button">Poster</a>
+    <a href="{{ url_for('users.nybruker_view') }}" class="w3-bar-item w3-button">Opprett Bruker</a>
+  </div>
+  
+  
+  <div class="w3-margin-left">
+  {% block content %} 
+  {% endblock %} 
+  </div>
+
+
+  <div class="w3-cell w3-border-gray">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li><br>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}   
+</div>
+  
+  {% if msg %}
+      <div class="w3-cell w3-border w3-margin-left">{{ msg }}</div><br>
+  {% endif %} 
+  
+  <div class="w3-margin-left">
+  {% block extra %} 
+  {% endblock extra %}
+  </div>
+  <hr />
+  
+  
+  {% include "include/brukerstatus.html" %}
+  <footer>
+    <a href="{{ url_for('main.index') }}" class="navbar-item-footer">Index </a>
+    <a href="{{ url_for('users.logout_view') }}" class="navbar-item-footer">Logout </a>
+    <p>© 2021</p>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+#navbar1  {
+background-color: rgb(80, 88, 97);
+font-size: 1em;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+color: white;
+padding: 8px 5px 8px 5px;
+          }
+.navbar1-item a {
+text-align: center;
+color: white;
+background-color: rgb(80, 88, 97);
+                }
+.navbar1-item a:hover .navbar1-item a:active .navbar1-item a:focus {
+  background-color: #111!important;
+  color: white!important;
+                      }
+  
+
+.navbar {
+      background-color: lightslategray;
+      font-size: 1em;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      color: white;
+      padding: 8px 5px 8px 5px;
+    }
+
+
+.navbar-datter a {
+      text-decoration: none;
+      font-variant: small-caps;
+      color: white;
+    }
+    
+.body-content {
+      padding: 5px;
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    
+.navbar-brand {
+      font-size: 1.2em;
+      font-weight: 600;
+    }
+    
+.navbar-footer {
+      font-variant: small-caps;
+      color:grey
+      margin-left: 30px;
+    }

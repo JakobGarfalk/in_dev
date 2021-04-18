@@ -1,0 +1,153 @@
+{% macro bruker_infotable(bruker) %}
+
+<table border=1>
+
+    {% if bruker %}
+      <tr> 
+        <th> Bruker: </th>
+        <td> {{ bruker.brukernavn }} </td>
+      </tr>
+      <tr>
+        <th> Fornavn: </th>
+        <td> {{ bruker.fornavn }} </td>
+      </tr>
+      <tr>
+        <th> Profilside:</th>
+        <td> <a href="/bruker/{{bruker.brukernavn}}" class="w3-bar-item w3-button">{{bruker.brukernavn}}</a> </td>
+      </tr>
+    {% else %}
+     <tr> 
+      <th> Bruker: </th>
+      <td> ikke logget inn</td> </tr> <tr>
+      <th> Opprett ny profil her: </th>
+      <td> <a href="{{ url_for('nybruker') }}" class="w3-bar-item w3-button">Registrer deg</a> </td>
+     </tr> 
+    {% endif %}      
+</table>
+{% endmacro %}
+
+{% macro bruker_side(bruker) %}
+    <h1>Profil: {{ bruker.brukernavn }} </h1>
+    <p>Fornavn: {{ bruker.fornavn }}</p>
+    <p>Venner:  </p>
+    <p>Om meg:  </p>
+    <p>Sist aktiv: {{bruker.logindato.strftime("kl.%H:%M:%S den %e.%b.%y") }}</p>
+
+{% endmacro %}
+
+
+
+
+{% macro vis_kommentarer(comments1) %}
+  <h1> LASTET FRA KORREKT MACRO? hhv til view_post  </h1>
+  <h3>Kommentarer</h3>
+  {% if comments1 %}
+    {% for comment in comments1 %}
+          
+      {% if comment.forfatter %}
+          <small>{{ comment.forfatter}} skrev:</small>
+      {% else %}
+          <small>anonym skrev:</small>
+      {% endif %}      
+      
+      <p>{{ comment.innhold | replace("\n", "<br>") | safe }}</p>
+          
+      {% if comment.dato %}
+          <small>postet: {{ comment.dato.strftime("kl.%H:%M:%S den %e.%b.%y ") }}  </small>
+      {% else %}
+          <small>( postet: i ukjente tider ) </small>
+      {% endif %}
+              
+    {% endfor %}
+  {% else %}
+      <p>Ingen kommentarer i databasen.</p>
+  {% endif %}
+  <div class="table-responsive">
+    <table class="table table-sm table-borderless mb-0">
+        <thead class="thead-dark">
+            <tr>
+                <th>S/N</th>
+                <th>Color Name</th>
+                <th>Date Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for color in colors.items %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ color.name }}</td>
+                <td>{{ color.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endmacro %}
+
+
+{% macro vis_poster(poster) %}
+
+  <h1 style="font-family: fantasy;">POSTER</h1>
+  {% if poster %}
+  {% for post in poster %}
+    
+    <h2>{{ post.tittel }}</h2>
+    <p>Postet: {{ post.dato.strftime("kl.%H:%M:%S den %e.%b.%y ") }}</p>
+    <strong>{{ post.slug | replace("\n", "<br>") | safe }}</strong>
+    <p>{{ post.innhold  | replace("\n", "<br>") | safe }}</p>
+    
+    <small>{{ post.id }} <br> forfatter: </small>
+    <a href="{{url_for('brukerside',get_brukernavn=post.poster_fra.brukernavn)}}" class="w3-item w3-button"><small> {{post.poster_fra.fornavn}} {{ post.poster_fra.etternavn }} </small></a>
+    
+  {% endfor %}
+{% else %}
+  <p>Det er ingen innlegg i databasen.</p>
+{% endif %}
+
+{% endmacro %}
+
+<div class="w3-table">
+      <table class="">
+          <thead class="w3-thead-dark">
+              <tr>
+                  <th>ID:</th>
+                  <th>Fornavn:</th>
+                  <th>Etternavn:</th>
+                  <th>Brukernavn:</th>
+                  <th>Opprettet:</th>
+                  <th>Sist Aktiv:</th>
+              </tr>
+          </thead>
+          <tbody>
+            <td>{{bruker.id}}</td>
+            <td>{{bruker.fornavn}}</td>
+            <td>{{bruker.etternavn}}</td>
+            <td>{{bruker.brukernavn}}</td>
+            <td>{{bruker.dato.strftime("%H:%M:%S %e.%b.%y")}}</td>
+            <td>{{bruker.logindato.strftime("%H:%M:%S %e.%b.%y")}}</td>
+          </tbody>
+      </table>
+  </div>
+
+{% macro vis_poster(poster) %}
+
+{% if poster %}
+  {% for post in poster %}
+    
+    <h2>{{ post.tittel }}</h2>
+    <p>Postet: {{ post.dato.strftime("kl.%H:%M:%S den %e.%b.%y ") }}</p>
+    <a href="{{url_for('brukerside',get_brukernavn=post.poster_fra.brukernavn)}}" class="w3-item w3-button"><small> av {{post.poster_fra.fornavn}} {{ post.poster_fra.etternavn }} </small></a>
+    <br>
+    <small> av {{ post.poster_fra.fornavn }} {{ post.poster_fra.etternavn }}  <br></small>
+    <h3><strong>{{ post.slug | replace("\n", "<br>") | safe }}</strong></h3>
+    <p>{{ post.innhold  | replace("\n", "<br>") | safe }}</p>
+    <a href="{{url_for('post_comment',get_post=post.id)}}" class="w3-item w3-button"><small> Kommentere innlegg </small></a>
+    <br>
+    
+    
+  {% endfor %}
+{% else %}
+  <p>Det er ingen innlegg i databasen.</p>
+{% endif %}
+{% endmacro %}

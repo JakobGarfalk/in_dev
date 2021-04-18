@@ -1,0 +1,75 @@
+body {
+background-color: gray;
+color:darkviolet
+}
+h1 {
+text-align: center;
+background-color: gray;
+color:darkviolet
+}
+p {
+background-color: gray;
+color:darkviolet
+}
+.testng {
+text-align: center;
+background-color: gray;
+color:darkviolet
+}
+
+.navbar {
+  background-color: lightslategray;
+  font-size: 1em;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: white;
+  padding: 8px 5px 8px 5px;
+}
+.navbar-datter-left {
+  text-decoration: none;
+  color: inherit;
+  font-variant: small-caps;
+  margin-left: 30px;
+  
+}
+.navbar-datter-left a {
+  text-decoration: none;
+  color: inherit;
+  font-variant: small-caps;
+  
+}
+
+.body-content {
+  padding: 5px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.message {
+    font-weight: 600;
+    color: blue;
+}
+
+.navbar a {
+    background-color: lightslategray;
+    font-size: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    padding: 8px 5px 8px 5px;
+}
+
+.navbar-brand {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.navbar-footer {
+  font-variant: small-caps;
+  margin-left: 30px;
+}
+
+.historier {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.4em;
+  border: 2px darkblue;
+  color:grey
+  
+}

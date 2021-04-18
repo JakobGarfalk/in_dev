@@ -1,0 +1,40 @@
+.navbar-new {color:#fff!important;background-color:#616161!important;
+  padding:8px 16px;float:left;width:auto;
+  border:none;
+  white-space:normal;text-align:center;
+}
+
+.w3-button:hover{color:#000!important;background-color:#616161!important;}
+
+.aside {
+  width: 30%;
+  padding-left: 15px;
+  margin-left: 15px;
+  float: right;
+  font-style: italic;
+  background-color: lightgray;
+}
+
+.navbar {
+    background-color: lightslategray;
+    font-size: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    padding: 8px 5px 8px 5px;
+  }
+
+.navbar-datter {
+    text-decoration: none;
+    color: inherit;
+    font-variant: small-caps;   
+  }
+  
+.body-content {
+    padding: 5px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+ 
+.navbar-footer {
+    font-variant: small-caps;
+
+  }

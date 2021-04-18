@@ -1,0 +1,33 @@
+{% extends "layout/layout1w3.html" %}
+{% from "macro/bruker.html" import bruker_side %}
+{% from "macro/view_post.html" import vis_posten %}
+{% from "macro/form.html" import post_form %}
+
+{% block content %}
+    <div class="w3-card">
+     <div class="w3-container">
+
+      {{ bruker_side(bruker, current_user, follow_me, follow_by) }}
+      {% if poster %}
+        {{ vis_posten(poster) }}
+      {% endif %}
+      {% if form %}
+        {{ post_form(form) }}
+      {% endif %}
+
+      {% if postkasse!=False and current_user.brukernavn==bruker.brukernavn %}
+        
+            {% for meld in postkasse %}
+                <p>Emne: <strong>{{ meld.tittel }}</strong></p>
+                <p>Innhold: <br> {{meld.innhold | replace ("\n","<br>") | safe }}</p>
+                
+                <p><small>Sender: <br> {{ meld.melding_fra.rettighet }}</small>;</p>
+                <a href="/bruker/{{meld.melding_fra.brukernavn}}" class="w3-item w3-button"> {{meld.melding_fra.brukernavn}}</a>
+            {% endfor %}
+        
+      {% endif %}
+      
+      
+     </div>
+    </div>
+{% endblock %}

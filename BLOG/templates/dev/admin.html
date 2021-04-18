@@ -1,0 +1,67 @@
+{% extends 'layout/layout1w3.html' %}
+
+{% block content %}
+    <h1> ADMINISTRERING </h1>
+
+
+    {% if beskjed %}
+      <div class="w3-container w3-grey">
+        <p>{{ beskjed }}</p>
+        <p>This is a test of your function.</p>
+        <p id="til1"></p>
+      </div>
+      <form action="." method="POST">       
+          
+        <input type="text" id="admin1" name="admin1" class="form-control" placeholder="my function is...">
+        
+        <input type="submit" name="submitfunc" class="w3-button" value="UTFØR">
+    </form>
+    {% endif %}
+    {% if lyd %}
+      <audio controls autoplay>
+        <source src="{{ url_for('static', filename='/lyd/voice_stayaway.mp3' )}}">
+      </audio>
+    {% endif %}
+    <p>Velg funksjon:</p>
+     
+   
+    <p> Bruker:</p>
+      <form action="." method="POST">       
+          
+          <input type="text" id="Lbrukernavn" name="Lbrukernavn" class="form-control" placeholder="søk brukernavn">
+          
+          <input type="submit" name="submit2" class="btn btn-success" value="UTFØR">
+      </form>
+  
+    <p></p>
+
+    {% for b in brukere %}
+      <p> ID:        {{ b.id }} </p>
+      <p> Navn:      {{ b.fornavn }} </p>
+      <p> Navn:      {{ b.etternavn }} </p>
+      <p> Opprettet: {{ b.dato }} </p>
+      <p> Logindato: {{ b.logindato }} </p>
+      <p> Bruker:    {{ b.brukernavn }} </p>
+      <p> Email:     {{ b.email1 }} </p>
+      <p>            {{ b.rettighet }} </p>
+      <p> hash:      {{ b.password_hash }} </p>
+      <p> Pass:      {{ b.passord }} </p>
+    {% endfor %}
+    <p></p>
+    {% if oppdrag %}
+        <ul>
+        <li> Fant: {{ oppdrag.brukernavn }} </li>
+        <li> med ID: {{ oppdrag.id }} </li>
+        </ul>
+    {% endif %}
+    {% if oppdrag2 %}
+        {% for opp2 in oppdrag2 %}
+          <p> Fant post ID: {{opp2.id }}</p>
+          <p> post tittel:  {{opp2.tittel }}</p>
+          <p> post slug:    <strong>{{opp2.slug }}</strong> </p>
+          <p> post innhold: {{opp2.innhold | replace("\n","<br>") | safe}}</p>
+        {% endfor %}
+    {% endif %}
+
+  
+{% endblock content %}

@@ -1,0 +1,63 @@
+{% macro vis_poster(poster) %}
+
+{% if poster %}
+  {% for post in poster %}
+    
+    <h2>{{ post.tittel }}</h2>
+    <p>Postet: {{ post.dato.strftime("kl.%H:%M:%S den %e.%b.%y ") }}
+    <a href="{{url_for('main.brukerside',get_brukernavn=post.poster_fra.brukernavn)}}" class="w3-item w3-button"><small> av {{post.poster_fra.fornavn}} {{ post.poster_fra.etternavn }} </small></a>
+    </p>
+    <h3><strong>{{ post.slug | replace("\n", "<br>") | safe }}</strong></h3>
+    <p>{{ post.innhold  | replace("\n", "<br>") | safe }}</p>
+    <a href="{{url_for('main.post_comment',get_post=post.id)}}" class="w3-item w3-button"><small> Kommentere innlegg </small></a>
+    <br>
+    
+    
+  {% endfor %}
+{% else %}
+  <p>Det er ingen innlegg i databasen.</p>
+{% endif %}
+{% endmacro %}
+
+{% macro vis_posten(poster) %}
+{% if poster %}
+    
+    <h2>{{ poster.tittel }}</h2>
+    <p><small> {{ poster.dato.strftime("kl.%H:%M:%S den %e.%b.%y ") }}</small></p>
+    <p><small> {{ poster.oppdatert.strftime("kl.%H:%M:%S den %e.%b.%y ") }}</small></p>
+    <a href="{{url_for('main.brukerside',get_brukernavn=poster.poster_fra.brukernavn)}}" class="w3-item w3-button"><small> av {{poster.poster_fra.fornavn}} {{ poster.poster_fra.etternavn }} </small></a>
+    
+    <h3><strong>{{ poster.slug | replace("\n", "<br>") | safe }}</strong></h3>
+    <p>{{ poster.innhold | replace("\n", "<br>") | safe }}</p>
+    <a href="{{url_for('main.post_comment',get_post=poster.id)}}" class="w3-item w3-button"><small> Kommentere innlegg </small></a>
+    <br>
+    
+    
+{% else %}
+  <p>Det er ingen innlegg i databasen.</p>
+{% endif %}
+{% endmacro %}
+
+
+{% macro vis_kommentarer(comments1) %}
+
+  <h3>Kommentarer</h3>
+  {% if comments1 %}
+    {% for comment in comments1 %}
+          
+      {% if comment.forfatter %}
+          <small>{{ comment.forfatter}} skrev:</small>
+          <small>{{ comment.dato.strftime("kl.%H:%M:%S den %e.%b.%y ") }}  </small>
+      {% else %}
+          <small>anonym skrev:</small>
+          <small>{{ comment.dato.strftime("kl.%H:%M:%S den %e.%b.%y ") }}  </small>
+      {% endif %}      
+      
+      <p>{{ comment.innhold | replace("\n", "<br>") | safe }}</p>
+              
+    {% endfor %}
+  {% else %}
+      <p>Ingen kommentarer i databasen.</p>
+  {% endif %}
+
+{% endmacro %}

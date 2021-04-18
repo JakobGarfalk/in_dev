@@ -1,0 +1,11 @@
+<div class="w3-justify w3-cell w3-gray">
+<table border=1>
+<th> Bruker: </th>
+{% if current_user.is_authenticated %}
+    <td> {{ current_user.brukernavn }} </td>
+
+{% else %}
+    <td> ikke logget inn</td>
+{% endif %}
+</table>
+</div>

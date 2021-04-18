@@ -1,0 +1,22 @@
+{% extends "layout/layout1w3.html" %}
+{% from "macro/bruker.html" import bruker_side %}
+{% from "macro/form.html" import generell_form %}
+
+{% block content %}
+    <div class="w3-card">
+     <div class="w3-container">
+
+      {{ bruker_side(bruker, current_user, follow_me, follow_by) }}
+
+
+      {% if postkasse!=False and postkasse.count()>0 %}
+          <p>Du har {{postkasse.count()}} nye meldinger!</p>  
+      {% endif %}
+
+
+      {% if form %}
+        {{ generell_form(form) }}
+      {% endif %}
+     </div>
+    </div>
+{% endblock %}

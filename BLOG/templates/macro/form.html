@@ -1,0 +1,119 @@
+{% macro generell_form(form) %}
+
+ <form action="" method="POST">
+
+    {{ form.csrf_token() }}
+    
+    {% for field in form if field.name != "csrf_token" %}
+      {% if field.name != "send_knapp" %}  
+        <p>{{ field.label() }}</p>
+      {% endif %}
+      <p>{{ field }}
+        
+      {% for error in field.errors %}
+        {{ error }}
+      {% endfor %}
+      </p>
+    {% endfor %}
+    
+ </form>
+{% endmacro %}
+
+{% macro login_form1(form) %}
+<form action="" method="POST" class="w3-container w3-justify w3-padding">
+  {{ form.csrf_token() }}
+  <input type="hidden" value="{{ request.args.get('next', '') }}"/>
+  {% if form.brukernavn.errors %}
+  <div class="w3-table w3-red">
+      <ul class="errors">
+      {% for error in form.brukernavn.errors %}
+          <li>{{ error }}</li>
+       {% endfor %}
+      </ul>
+  </div>
+  {% endif %}
+  <div class="w3-container w3-justify w3-border w3-round">
+  {{ form.brukernavn.label }}<br>
+  {{ form.brukernavn }}
+  <br>
+  {% if form.password.errors %}
+    {{ form.password.errors }}<br>
+  {% endif %}
+  <p>{{ form.password.label }}<br></p>
+  {{ form.password }}
+  <p>{{ form.remember_me() }} {{form.remember_me.label}}</p>
+  <br>
+  <p>   </p>
+  <div class="w3-btn w3-grey w3-round">
+  {{ form.send_knapp }}
+  </div>
+  </div>
+</form>
+{% endmacro %}
+
+{% macro comment_form(form) %}
+ <form action="" method="POST" class="form">
+  {{ form.csrf_token() }}
+  {% if form.errors %}
+   <div class="w3-table w3-red">
+      <ul class="errors">
+        
+        <li>{{ form.innhold.errors[0] }}</li>
+        <li>{{ form.forfatter.errors[0] }}</li>
+        
+      </ul>
+   </div>
+  {% endif %}
+
+  {{ form.innhold.label }}<br>
+  {{ form.innhold(placeholder='Ingen bryr seg om dagens vær lengre...') }}<br>
+  {{ form.forfatter.label }}
+  {{ form.forfatter }}<br>
+
+  {{ form.send_knapp }}
+  
+ </form>
+{% endmacro %}
+
+{% macro bruker_side(bruker) %}
+    <h1>Profil: {{ bruker.brukernavn }} </h1>
+    <p>Fornavn: {{ bruker.fornavn }}</p>
+    <p>Venner:  </p>
+    <p>Om meg:  </p>
+    <p>Sist aktiv: {{bruker.logindato.strftime("kl.%H:%M:%S den %e.%b.%y") }}</p>
+
+{% endmacro %}
+
+{% macro post_form(form) %}
+ <form action="" method="POST" class="form">
+  {{ form.csrf_token() }}
+  
+  {% if form.errors %}
+   <div class="w3-table w3-red">
+      <ul class="errors">
+        {% if form.tittel.errors %}
+          <li>{{ form.tittel.errors[0] }}</li>
+        {% endif %}
+        {% if form.slug.errors %}
+          <li>{{ form.slug.errors[0] }}</li>
+        {% endif %}
+        {% if form.innhold.errors %}
+          <li>{{ form.innhold.errors[0] }}</li>
+        {% endif %}
+      
+      </ul>
+   </div>
+  {% endif %}
+  
+  {{ form.tittel.label }}<br>
+  {{ form.tittel }}<br>
+  {{ form.slug.label }}<br>
+  {{ form.slug }}<br>
+  {{ form.innhold.label }}<br>
+  {{ form.innhold }}<br>
+  
+
+  {{ form.send_knapp }}
+  
+ </form>
+{% endmacro %}

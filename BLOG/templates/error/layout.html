@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+  {% if title %}
+  <title>{{ title }}</title>
+  {% else %}
+  <title>Deus Ex Machina</title>
+  {% endif %}
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/w3.css')}}" />
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+
+  <div class="w3-bar w3-black">
+    <a href="{{ url_for('main.index') }}" class="w3-bar-item w3-button">Index</a>
+    <a href="{{ url_for('users.login_view') }}" class="w3-bar-item w3-button">Login</a>
+  </div>
+  {% block content %}
+
+  {% endblock %} 
+  
+
+
+  <div class="w3-cell w3-border-gray">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}   
+</div>
+  
+  {% if msg %}
+      <div class="w3-cell w3-border">{{ msg }}</div>
+  {% endif %} 
+  
+  
+  {% block extra %} 
+  {% endblock extra %}
+
+  <hr />
+  
+  
+
+  <footer>
+    <p>© 2021</p>
+  </footer>
+</body>
+
+</html>

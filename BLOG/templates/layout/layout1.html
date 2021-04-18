@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+
+{% if title %}
+    <title> {{ title }} </title>
+{% else %}
+    <title> Deus Ex Machina </title>
+{% endif %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/layout1.css')}}" />
+</head>
+
+<body>
+<div class = "DO-NOT-MESS-WITH-LAYOUT1-COPY-THEN-EDIT">                                             </div>
+
+<div class="navbar">          
+    <a href="{{ url_for('index') }}" class="navbar-datter">Index</a>
+    <a href="{{ url_for('poster') }}" class="navbar-datter">Arkivarium</a>
+    <a href="{{ url_for('login1') }}" class="navbar-datter">Login</a>  
+    <a href="{{ url_for('nybruker') }}" class="navbar-datter">Ny Bruker</a>
+    <a href="{{ url_for('innlegg') }}" class="navbar-datter">Poster</a>
+</div>
+{% block content %}
+{% endblock %}
+    
+{% block extra %}
+{% endblock extra %}
+    
+<hr/>
+    
+<footer>
+<a href="{{ url_for('index') }}" class="navbar-item-footer">Index </a>
+<a href="{{ url_for('logout1') }}" class="navbar-item-footer">Logout </a>
+<p>© 2021</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends "layout/layout1w3.html" %}
+{% from "macro/view_post.html" import vis_poster, vis_kommentarer %}
+
+{% block content %}
+    <h1>There Burn, There Die, There Grow</h1>
+    <img src="{{url_for('static', filename='/images/jolly_roger.jpg') }}" alt="willcommen" style="height: 500px;">
+    {% if current_user.is_authenticated %}
+        <p>Vi har ventet på deg {{ current_user.brukernavn }},</p>
+        <p> velkommen tibake! </p>
+        <p>Hvis vi tar feil kan du alltids logge inn på <a href="{{ url_for('users.login_view') }}" class="paragraf-link">nytt.</a></bold></p>
+
+    {% else %}
+        <p>Vi ser en skygge komme i mørket,</p>
+        <p> -ønsker du å logge deg inn?  <bold><a href="{{ url_for('users.login_view') }}" class="paragraf-link"> Login </a></bold></p>
+        <p>Eller må du kanskje <bold><a href="{{ url_for('users.nybruker_view') }}" class="paragraf-link">registrere en ny profil?</a></bold></p>
+    {% endif %}
+    <hr/>
+
+    <h2>Siste Nytt</h2>
+    <p></p>
+    {{ vis_poster(poster) }}
+
+{% endblock %}
+
+{% block extra %}
+    <hr/>
+    {{ vis_kommentarer(comments1) }}
+    <br>
+    {% if prev_url %}
+    <a href="{{ prev_url }}">Les nyere</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}">Les eldre</a>
+    {% endif %}
+{% endblock %}

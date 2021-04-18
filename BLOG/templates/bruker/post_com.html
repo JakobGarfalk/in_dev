@@ -1,0 +1,28 @@
+{% extends "layout/layout1w3.html" %}
+{% from "macro/view_post.html" import vis_poster %}
+{% from "macro/form.html" import generell_form %}
+
+
+{% block content %}
+  <h1 style="font-family: fantasy;">DEBATT INNLEGG</h1>
+  <h2>{{ poster.tittel }}</h2>
+  <p>Postet: {{ poster.dato.strftime("kl.%H:%M:%S den %e.%b.%y ") }}</p>
+  <small> av {{ poster.poster_fra.fornavn }} {{ poster.poster_fra.etternavn }}  <br></small>
+  <strong>{{ poster.slug | replace("\n", "<br>") | safe }}</strong>
+  <p>{{ poster.innhold  | replace("\n", "<br>") | safe }}</p>
+  <br>
+  {% if innlegg %}
+    {% for i in innlegg %}
+      <p><strong> {{ i.tittel }} </strong></p>
+      <p> {{ i.innhold | replace("\n","<br>") | safe }} </p>
+      <p><small> {{ i.forfatter_id }}</small></p>
+    {% endfor %}
+  {% endif %}
+
+{% endblock %}
+
+{% block extra %}
+    {% if form %}
+      {{ generell_form(form) }}
+    {% endif %}
+{% endblock %}

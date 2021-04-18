@@ -1,0 +1,10 @@
+__title__ = 'Flask-Login-Customized'
+__description__ = 'User session management for Flask'
+__url__ = 'https://github.com/maxcountryman/flask-login'
+__version_info__ = ('0', '5', '0')
+__version__ = '.'.join(__version_info__)
+__author__ = 'Original:Matthew Frazier,Custom:Jakob Dahl'
+__author_email__ = 'Original:leafstormrush@gmail.com'
+__maintainer__ = 'God & You Alone'
+__license__ = 'NoLicense'
+__copyright__ = '(c) 2011 by Matthew Frazier'

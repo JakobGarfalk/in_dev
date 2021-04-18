@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/w3.css')}}" />
+<meta charset="utf-8" />
+{% if title %}
+    <title> {{ title }} </title>
+{% else %}
+    <title> Deus Ex Machina </title>
+{% endif %}
+
+</head>
+
+<body>
+
+<div class="w3-bar w3-border w3-black">
+  <a href="{{ url_for('index') }}" class="w3-bar-item w3-button">Index</a>
+  <a href="{{ url_for('poster') }}" class="w3-bar-item w3-button w3-hover-none w3-text-grey w3-hover-text-white">Arkivarium</a>
+  <a href="{{ url_for('login1') }}" class="w3-bar-item w3-button w3-hover-none w3-text-grey w3-hover-text-white">Login</a>
+  <a href="{{ url_for('nybruker') }}" class="w3-bar-item w3-button w3-hover-none w3-text-grey w3-hover-text-white">Ny Bruker</a>
+</div>
+
+{% block content %}
+{% endblock %}
+
+<hr/>
+
+{% block extra %}
+{% endblock %}    
+    
+    
+<hr/>
+    
+<footer>
+<a href="{{ url_for('index') }}" class="navbar-footer">Til index </a>
+<a href="{{ url_for('logout1') }}" class="navbar-item-footer">Logout </a>
+<p>© 2021</p>
+</footer>
+
+</body>
+</html>

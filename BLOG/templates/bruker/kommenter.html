@@ -1,0 +1,33 @@
+{% extends "layout/layout1w3.html" %}
+{% from "macro/view_post.html" import vis_kommentarer %}
+{% from "macro/form.html" import comment_form %}
+
+{% block content %}
+    <h1>RED LIGHT DISTRICT</h1>
+    <p>Velkommen,</p>
+    <p>ønsker du å legge igjen en kommentar så føl deg fri til det.</p>
+    <p>Kommentarer kan postes anonymt, og knyttes ikke opp mot noen bruker-profil.</p>
+    <p>Desverre må vi kanskje etterhvert kreve at du logger deg inn for å benytte funksjonen,</p>
+    <p> -da vi ikke ønsker et helvete av spam fra bot'er og det som verre er.</p>
+    <p>Men kan uansett forsikre at kommentarene ikke er knyttet til din profil.</p>
+    <p> (inntil videre er det åpent for alle)</p>
+{% endblock %}
+
+{% block extra %}
+    
+    {{vis_kommentarer(comments1)}}
+    <br>
+    {% if prev_url %}
+      <a href="{{ prev_url }}">Les nyere..</a>
+    {% endif %}
+    {% if next_url %}
+      <a href="{{ next_url }}">..Les eldre</a>
+    {% endif %}
+    <br>
+    {% if form %}
+        {{ comment_form(form) }}
+    {% endif %}
+
+
+
+{% endblock %}

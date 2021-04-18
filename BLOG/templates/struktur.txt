@@ -1,0 +1,11 @@
+Strukturen i templates bør være rimelig nærme dette:
+BLOG/Users har templates/bruker/ som root,
+BLOG/errors/ har templates/error/ som root, ->OK
+
+spesialtilfeller:
+
+templates/macro/ -> det gir mening å dele disse
+templates/macro/bruker/ eller;
+templates/macro/bruker.html, brukerside.html, brukerstatus.html?
+
+sjekk praktiske eksempler for å finne løsningen!
